@@ -5,17 +5,21 @@ using UnityEngine;
 
 public class Clock : MonoBehaviour
 {
+    const float hoursToDegrees = 30f, minutesToDegrees = 6f, secondsToDegrees = 6f;
     [SerializeField]
     Transform hoursPivot, minutesPivot, secondsPivot;
 
     void Update (){
-        DateTime time = DateTime.Now;
-        Debug.Log(DateTime.Now);
-        hoursPivot.localRotation = Quaternion.Euler(0, 0, 30 * time.Hour);
-        minutesPivot.localRotation = Quaternion.Euler(0, 0, 6 * time.Minute);
-        secondsPivot.localRotation = Quaternion.Euler(0, 0, 6 * time.Second);
+        TimeSpan time = DateTime.Now.TimeOfDay;
+       // Debug.Log(DateTime.Now);
+        hoursPivot.localRotation = Quaternion.Euler(0, 0, hoursToDegrees * (float)time.TotalHours);
+        minutesPivot.localRotation = Quaternion.Euler(0, 0, minutesToDegrees * (float)time.TotalMinutes);
+        
+        DateTime Time = DateTime.Now;
+        secondsPivot.localRotation = Quaternion.Euler(0, 0, secondsToDegrees * time.Seconds);
     }
     
+
 
     
 }
